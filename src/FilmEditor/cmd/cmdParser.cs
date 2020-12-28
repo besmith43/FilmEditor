@@ -30,6 +30,9 @@ namespace FilmEditor.cmd
                     case EditCommand.COMMAND_NAME:
                         opts.command = new EditCommand(_args.Skip(1).ToArray());
                         break;
+                    case RenameCommand.COMMAND_NAME:
+                        opts.command = new RenameCommand(_args.Skip(1).ToArray());
+                        break;
                     default:
                         opts.helpFlag = true;
                         break;

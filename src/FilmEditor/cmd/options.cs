@@ -24,7 +24,13 @@ namespace FilmEditor.cmd
             verbose = false;
             StringBuilder helpTextBuilder = new StringBuilder();
             helpTextBuilder.AppendLine($"FilmEditor { versionText }");
-            helpTextBuilder.AppendLine("Usage:  FilmEditor [OPTION]  ");
+            helpTextBuilder.AppendLine("Usage:  FilmEditor <Command> [OPTION]  ");
+            helpTextBuilder.AppendLine("");
+            helpTextBuilder.AppendLine("Commands");
+            helpTextBuilder.AppendLine("new         Create new csv in order to edit or split an mp4 file");
+            helpTextBuilder.AppendLine("edit        Use given csv to edit out sections and join the pieces into a single smaller mp4 file");
+            helpTextBuilder.AppendLine("split       Use given csv to slice an mp4 into smaller episodes");
+            helpTextBuilder.AppendLine("rename      Use source directory to mass rename mp4 episodes");
             helpTextBuilder.AppendLine("");
             helpTextBuilder.AppendLine("    -V | --verbose          Set verbose mode");
             helpTextBuilder.AppendLine("    -v | --version          Display version message");

@@ -33,6 +33,12 @@ namespace FilmEditor.Commands
         {
             return Task.Run(() => {
 
+                if (Program.cmdFlags.helpFlag)
+                {
+                    helpScreen();
+                    return false;
+                }
+
                 bool quit = false;
 
                 do
@@ -199,6 +205,21 @@ namespace FilmEditor.Commands
         private void saveCSV()
         {
             File.WriteAllText(csvFilename, csv.ToString());
+        }
+
+        private void helpScreen()
+        {
+            StringBuilder helpScreenText = new();
+
+            helpScreenText.AppendLine($"FilmEditor { Program.cmdFlags.versionText }");
+            helpScreenText.AppendLine("Usage:  FilmEditor new [OPTION]  ");
+            helpScreenText.AppendLine("");
+            helpScreenText.AppendLine("    -e | --edit <mp4 file>           Create csv for edit command");
+            helpScreenText.AppendLine("    -s | --split <mp4 file>          Create csv for split command");
+            helpScreenText.AppendLine("    --season <int>                   (Optional) Pass in the season number");
+            helpScreenText.AppendLine("");
+
+            Console.WriteLine(helpScreenText.ToString());
         }
     }
 }

@@ -5,6 +5,7 @@ using FFMpegCore.Helpers;
 using FFMpegCore.Pipes;
 using System;
 using System.IO;
+using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,6 +33,13 @@ namespace FilmEditor.Commands
         public Task<bool> ExecuteAsync()
         {
             return Task.Run(() => {
+
+                if (Program.cmdFlags.helpFlag)
+                {
+                    helpScreen();
+                    return false;
+                }
+
                 if (string.IsNullOrEmpty(csvContent[0]))
                 {
                     return false;
@@ -125,6 +133,20 @@ namespace FilmEditor.Commands
         private void Concat()
         {
             FFMpeg.Join(outputFile, tempClips.ToArray());
+        }
+
+        private void helpScreen()
+        {
+            StringBuilder helpScreenText = new();
+
+            helpScreenText.AppendLine($"FilmEditor { Program.cmdFlags.versionText }");
+            helpScreenText.AppendLine("Usage:  FilmEditor new [OPTION]  ");
+            helpScreenText.AppendLine("");
+            helpScreenText.AppendLine("    -c | --csv <csv file>            Pass in csv containing edit information");
+            helpScreenText.AppendLine("    -o | --output <destionation folder>  (Optional) Set Destionation Folder");
+            helpScreenText.AppendLine("");
+
+            Console.WriteLine(helpScreenText.ToString());
         }
     }
 }

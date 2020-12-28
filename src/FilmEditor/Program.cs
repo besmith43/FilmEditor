@@ -26,12 +26,6 @@ namespace FilmEditor
                 return;
             }
 
-            if (cmdFlags.helpFlag)
-            {
-                Console.WriteLine(cmdFlags.helpText);
-                return;
-            }
-
             Run();
         }
 
@@ -45,6 +39,10 @@ namespace FilmEditor
                 {
                     Environment.Exit(-1);
                 }
+            }
+            else
+            {
+                Console.WriteLine(cmdFlags.helpText);
             }
         }
 
