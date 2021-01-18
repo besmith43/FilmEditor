@@ -78,6 +78,10 @@ namespace FilmEditor.Commands
 
         private void Split(IMediaAnalysis source, int startSeconds, int stopSeconds, string output)
 		{
+            (int left, int top) cursorPosition = Console.GetCursorPosition();
+            Console.SetCursorPosition(0, cursorPosition.top);
+            Console.Write($"Splitting: { output }          ");
+
 			FFMpegArguments
 				.FromFileInput(source)
 				.OutputToFile(output, false, options => options

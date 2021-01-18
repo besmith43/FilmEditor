@@ -1,0 +1,6 @@
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\FilmEditor.pdb
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\clrcompression.dll
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\clrjit.dll
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\coreclr.dll
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\mscordaccore.dll
+C:\Users\besmi\Development\FilmEditor\output\self-contained\win-arm64\FilmEditor.exe

@@ -1,0 +1,9 @@
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\FilmEditor.pdb
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libSystem.IO.Compression.Native.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libSystem.Native.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libSystem.Net.Security.Native.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libSystem.Security.Cryptography.Native.Apple.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libSystem.Security.Cryptography.Native.OpenSsl.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libclrjit.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\libcoreclr.dylib
+C:\Users\besmi\Development\FilmEditor\output\self-contained\osx-x64\FilmEditor

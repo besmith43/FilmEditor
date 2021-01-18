@@ -114,11 +114,11 @@ namespace FilmEditor.Commands
             Console.WriteLine("What is the episode number?");
             string episodeNumber = Console.ReadLine();
 
-            Console.WriteLine("What is the start time? (minutes.seconds)");
+            Console.WriteLine("What is the start time? (hours.minutes.seconds)");
             string startInput = Console.ReadLine();
             int startTime = convertTime(startInput);
 
-            Console.WriteLine("What is the stop time? (minutes.seconds)");
+            Console.WriteLine("What is the stop time? (hours.minutes.seconds)");
             string stopInput = Console.ReadLine();
             int stopTime = convertTime(stopInput);
 
@@ -178,11 +178,32 @@ namespace FilmEditor.Commands
 
         private int convertTime(string timeString)
         {
-            string[] parts = timeString.Split('.');
-            int minutes = Int32.Parse(parts[0]);
-            int seconds = Int32.Parse(parts[1]);
+            int total = 0;
+            int hours = 0;
+            int minutes = 0;
+            int seconds = 0;
 
-            int total = (minutes * 60) + seconds;
+            string[] parts = timeString.Split('.');
+
+            switch (parts.Length)
+            {
+                case 1:
+                    total = Int32.Parse(parts[0]);
+                    break;
+                case 2:
+                    minutes = Int32.Parse(parts[0]);
+                    seconds = Int32.Parse(parts[1]);
+
+                    total = (minutes * 60) + seconds;
+                    break;
+                case 3:
+                    hours = Int32.Parse(parts[0]);
+                    minutes = Int32.Parse(parts[1]);
+                    seconds = Int32.Parse(parts[2]);
+
+                    total = (hours * 60 * 60) + (minutes * 60) + seconds;
+                    break;
+            }
 
             return total;
         }

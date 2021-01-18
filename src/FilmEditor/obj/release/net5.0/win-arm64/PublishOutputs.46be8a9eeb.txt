@@ -1,0 +1,2 @@
+C:\Users\besmi\Development\FilmEditor\output\framework-dependent\win-arm64\FilmEditor.pdb
+C:\Users\besmi\Development\FilmEditor\output\framework-dependent\win-arm64\FilmEditor.exe

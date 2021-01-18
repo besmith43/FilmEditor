@@ -1,0 +1,2 @@
+C:\Users\besmi\Development\FilmEditor\output\framework-dependent\osx-x64\FilmEditor.pdb
+C:\Users\besmi\Development\FilmEditor\output\framework-dependent\osx-x64\FilmEditor

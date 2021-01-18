@@ -20,10 +20,11 @@ Task("Version")
     .Does(() => {
         var symVer = GitVersion();
         var version = symVer.SemVer;
+        Information(version);
     });
 
 Task("Restore")
-    .IsDependentOn("Clean")
+    .IsDependentOn("Version")
     .Does(() => {
         DotNetCoreRestore(solutionFolder);
     });
@@ -51,6 +52,25 @@ Task("Run")
     .IsDependentOn("Test")
     .Does(() => {
         DotNetCoreRun(projFile, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--new");
+        arguments.Append("--exe");
+        arguments.Append("\"C:\\Users\\besmi\\Tools\\Video2x\\video2x-nightly-win32-light\\video2x.exe\"");
+        arguments.Append("--tv");
+        arguments.Append("\"C:\\Users\\besmi\\Videos\\video2x_test\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Videos\\scaling_test\"");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
             Configuration = DebugConfiguration,
             NoRestore = true,
             NoBuild = true

@@ -33,6 +33,9 @@ namespace FilmEditor.cmd
                     case RenameCommand.COMMAND_NAME:
                         opts.command = new RenameCommand(_args.Skip(1).ToArray());
                         break;
+                    case ScaleCommand.COMMAND_NAME:
+                        opts.command = new ScaleCommand(_args.Skip(1).ToArray());
+                        break;
                     default:
                         opts.helpFlag = true;
                         break;

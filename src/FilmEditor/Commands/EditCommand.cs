@@ -140,7 +140,7 @@ namespace FilmEditor.Commands
             StringBuilder helpScreenText = new();
 
             helpScreenText.AppendLine($"FilmEditor { Program.cmdFlags.versionText }");
-            helpScreenText.AppendLine("Usage:  FilmEditor new [OPTION]  ");
+            helpScreenText.AppendLine("Usage:  FilmEditor edit [OPTION]  ");
             helpScreenText.AppendLine("");
             helpScreenText.AppendLine("    -c | --csv <csv file>            Pass in csv containing edit information");
             helpScreenText.AppendLine("    -o | --output <destionation folder>  (Optional) Set Destionation Folder");
