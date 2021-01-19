@@ -220,6 +220,18 @@ Task("Publish")
     .IsDependentOn("Publish-Dependent-Win-arm64")
     .IsDependentOn("Publish-Dependent-Win-x86");
 
+Task("Publish-Debug-Dependent-Win-x64")
+    .IsDependentOn("Test")
+    .Does(() => {
+        DotNetCorePublish(projFile, new DotNetCorePublishSettings{
+            Configuration = DebugConfiguration,
+            OutputDirectory = $"{ dependentOutputFolder }/debug/win-x64",
+            PublishSingleFile = true,
+            SelfContained = false,
+            Runtime = "win-x64"
+        });
+    });
+
 Task("Default")
     .IsDependentOn("Run");
 
