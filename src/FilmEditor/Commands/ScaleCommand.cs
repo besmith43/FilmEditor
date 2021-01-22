@@ -392,12 +392,12 @@ namespace FilmEditor.Commands
 			DebugWriteLine($"Yaml Path: { yamlPath }");
 
 			Console.WriteLine("Running Video2x with the following command: ");
-			Console.WriteLine($"{ exeFile } -c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 4 -o \"{ output }\"");
+			Console.WriteLine($"{ exeFile } -c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -o \"{ output }\"");
 
 			using (var video2xProcess = new Process())
 			{
 				video2xProcess.StartInfo.FileName = exeFile;
-				video2xProcess.StartInfo.Arguments = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 4 -o \"{ output }\"";
+				video2xProcess.StartInfo.Arguments = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -o \"{ output }\"";
 
 				video2xProcess.StartInfo.RedirectStandardOutput = true;
 				video2xProcess.StartInfo.RedirectStandardError = true;
