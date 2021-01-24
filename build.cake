@@ -10,6 +10,7 @@ var dependentOutputFolder = $"{ outputFolder }/framework-dependent";
 Task("Clean")
     .Does(() => {
         CleanDirectory(outputFolder);
+        CleanDirectory("./test/300 s01e01");
     });
 
 Task("Version")
@@ -76,10 +77,10 @@ Task("RunScale")
         arguments.Append("--new");
         arguments.Append("--exe");
         arguments.Append("\"C:\\Users\\besmi\\Tools\\Video2x\\video2x-nightly-win32-light\\video2x.exe\"");
-        arguments.Append("--tv");
-        arguments.Append("\"C:\\Users\\besmi\\Videos\\video2x_test\"");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Videos\\scaling_test\"");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\"");
         DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
             Configuration = DebugConfiguration,
             NoRestore = true,

@@ -162,6 +162,14 @@ namespace FilmEditor.Commands
 			else
 			{
 				Console.WriteLine($"{ file } is a nonstandard aspect ratio");
+				Console.WriteLine("Would you like to try to scale it as a 16x9 video? (Y/n)");
+				string answer = Console.ReadLine();
+
+				if (answer != "n" || answer != "N")
+				{
+					string[] outputNames = GenerateOutputNames(file);
+					CustomScale16x9(vidAnalysis, file, outputNames);
+				}
 			}
 		}
 
@@ -416,27 +424,48 @@ namespace FilmEditor.Commands
 			string yamlPath = $"{ Path.GetDirectoryName(exeFile) }\\video2x.yaml";
 			DebugWriteLine($"Yaml Path: { yamlPath }");
 
-			Console.WriteLine("Running Video2x with the following command: ");
-			Console.WriteLine($"{ exeFile } -c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"");
+			string commandArgs = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"";
+
+			//Console.WriteLine("Running Video2x with the following command: ");
+			//Console.WriteLine($"{ exeFile } { commandArgs }");
 
 			using (var video2xProcess = new Process())
 			{
 				video2xProcess.StartInfo.FileName = exeFile;
-				video2xProcess.StartInfo.Arguments = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"";
+				video2xProcess.StartInfo.Arguments = commandArgs;
 
+				video2xProcess.StartInfo.RedirectStandardInput = true;
 				video2xProcess.StartInfo.RedirectStandardOutput = true;
 				video2xProcess.StartInfo.RedirectStandardError = true;
 				video2xProcess.StartInfo.UseShellExecute = false;
 				video2xProcess.StartInfo.CreateNoWindow = true;
+				//video2xProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+
+				video2xProcess.OutputDataReceived += (s, e) =>
+				{
+					if (e != null && string.IsNullOrWhiteSpace(e.Data) == false)
+					{
+						Console.WriteLine(e.Data);
+					}
+				};
+
+				video2xProcess.ErrorDataReceived += (s, e) => 
+				{
+					if (e != null && string.IsNullOrWhiteSpace(e.Data) == false)
+					{
+						Console.WriteLine(e.Data);
+					}
+				};
 
 				video2xProcess.Start();
-				string result = video2xProcess.StandardError.ReadToEnd();
-				video2xProcess.WaitForExit();
+				video2xProcess.BeginOutputReadLine();
+				video2xProcess.BeginErrorReadLine();
 
-				if (!string.IsNullOrEmpty(result))
-				{
-					Console.WriteLine(result);
-				}
+				video2xProcess.StandardInput.WriteLine($"{ exeFile } { commandArgs }");
+                video2xProcess.StandardInput.Flush();
+                video2xProcess.StandardInput.Close();
+
+				video2xProcess.WaitForExit();
 			}
 		}
 
