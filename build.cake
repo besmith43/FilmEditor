@@ -1,6 +1,3 @@
-#addin nuget:?package=Cake.Git&version=0.22.0
-#tool "nuget:?package=GitVersion.CommandLine"
-
 var target = Argument("target", "Default");
 var DebugConfiguration = Argument("configuration", "Debug");
 var ReleaseConfiguration = Argument("configuration", "Release");
@@ -18,8 +15,21 @@ Task("Clean")
 Task("Version")
     .IsDependentOn("Clean")
     .Does(() => {
-        var symVer = GitVersion();
-        var version = symVer.SemVer;
+        var propsFile = "./src/Directory.Build.props";
+        var readedVersion = XmlPeek(propsFile, "//Version");
+        var currentVersion = new Version(readedVersion);
+        var newMinor = currentVersion.Minor;
+
+        if (target == "publish")
+        {
+            newMinor++;
+        }
+
+        var semVersion = new Version(currentVersion.Major, newMinor, currentVersion.Build + 1);
+        var version = semVersion.ToString();
+
+        XmlPoke(propsFile, "//Version", version);
+
         Information(version);
     });
 

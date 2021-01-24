@@ -16,6 +16,7 @@ namespace FilmEditor.Commands
 {
     public class ScaleCommand : ICommand
     {
+		// maybe add a timer?
 		public const string COMMAND_NAME = "scale";
 		public string exeFile;
 		public string movieFile;
@@ -47,14 +48,38 @@ namespace FilmEditor.Commands
 
 				if (!string.IsNullOrEmpty(movieFile))
 				{
+					Stopwatch stopWatch = new Stopwatch();
+        			stopWatch.Start();
+
 					DebugWriteLine($"scaling { movieFile }");
 					ConvertMovie(movieFile);
+
+					stopWatch.Stop();
+
+					TimeSpan ts = stopWatch.Elapsed;
+					string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+			            ts.Hours, ts.Minutes, ts.Seconds,
+			            ts.Milliseconds / 10);
+			        Console.WriteLine("RunTime " + elapsedTime);
+
 					return true;
 				}
 				else if (!string.IsNullOrEmpty(seasonFolder))
 				{
+					Stopwatch stopWatch = new Stopwatch();
+        			stopWatch.Start();
+
 					DebugWriteLine($"scaling { seasonFolder }");
 					ConvertTVSeason(seasonFolder);
+
+					stopWatch.Stop();
+
+					TimeSpan ts = stopWatch.Elapsed;
+					string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+			            ts.Hours, ts.Minutes, ts.Seconds,
+			            ts.Milliseconds / 10);
+			        Console.WriteLine("RunTime " + elapsedTime);
+
 					return true;
 				}
 
@@ -392,12 +417,12 @@ namespace FilmEditor.Commands
 			DebugWriteLine($"Yaml Path: { yamlPath }");
 
 			Console.WriteLine("Running Video2x with the following command: ");
-			Console.WriteLine($"{ exeFile } -c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -o \"{ output }\"");
+			Console.WriteLine($"{ exeFile } -c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"");
 
 			using (var video2xProcess = new Process())
 			{
 				video2xProcess.StartInfo.FileName = exeFile;
-				video2xProcess.StartInfo.Arguments = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -o \"{ output }\"";
+				video2xProcess.StartInfo.Arguments = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"";
 
 				video2xProcess.StartInfo.RedirectStandardOutput = true;
 				video2xProcess.StartInfo.RedirectStandardError = true;
