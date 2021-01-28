@@ -88,6 +88,26 @@ Task("RunScale")
         });
     });
 
+Task("RunScale-4k")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--new");
+        arguments.Append("--exe");
+        arguments.Append("\"C:\\Users\\besmi\\Tools\\Video2x\\video2x-nightly-win32-light\\video2x.exe\"");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\"");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
 Task("Package")
     .IsDependentOn("Test")
     .Does(() => {

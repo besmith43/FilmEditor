@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "FilmEditor.Test/1.5.15": {
+      "FilmEditor.Test/1.6.21": {
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "16.7.1",
           "coverlet.collector": "1.3.0",
@@ -1090,7 +1090,7 @@
     }
   },
   "libraries": {
-    "FilmEditor.Test/1.5.15": {
+    "FilmEditor.Test/1.6.21": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

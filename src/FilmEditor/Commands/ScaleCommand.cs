@@ -23,6 +23,12 @@ namespace FilmEditor.Commands
 		public string seasonFolder;
 		public string outputDirectory;
 		public bool newFolder = false;
+		public bool scale_4k = false;
+		public bool scale_2k = false;
+		public bool scale_1080p = false;
+		public bool scale_720p = false;
+		public bool scale_480p = false;
+		public bool scaleFlag = false;
 
 		public ScaleCommand(string[] _args)
 		{
@@ -100,24 +106,82 @@ namespace FilmEditor.Commands
                 if (args[i] == "-m" || args[i] == "--movie")
                 {
                     movieFile = args[i+1];
+					i++;
                 }
                 else if (args[i] == "-t" || args[i] == "--tv")
                 {
                     seasonFolder = args[i+1];
+					i++;
                 }
 				else if (args[i] == "-e" || args[i] == "--exe")
 				{
 					exeFile = args[i+1];
+					i++;
 				}
 				else if (args[i] == "-o" || args[i] == "--output")
 				{
 					outputDirectory = args[i+1];
+					i++;
 				}
 				else if (args[i] == "-n" || args[i] == "--new")
 				{
 					newFolder = true;
 				}
+				else if (args[i] == "--4k")
+				{
+					scale_4k = true;
+
+					if (!scaleFlag)
+					{
+						scaleFlag = true;
+					}
+				}
+				else if (args[i] == "--2k")
+				{
+					scale_2k = true;
+
+					if (!scaleFlag)
+					{
+						scaleFlag = true;
+					}
+				}
+				else if (args[i] == "--1080p")
+				{
+					scale_1080p = true;
+
+					if (!scaleFlag)
+					{
+						scaleFlag = true;
+					}
+				}
+				else if (args[i] == "--720p")
+				{
+					scale_720p = true;
+
+					if (!scaleFlag)
+					{
+						scaleFlag = true;
+					}
+				}
+				else if (args[i] == "--480p")
+				{
+					scale_480p = true;
+
+					if (!scaleFlag)
+					{
+						scaleFlag = true;
+					}
+				}
             }
+
+			if (!scaleFlag)
+			{
+				scale_4k = true;
+				scale_2k = true;
+				scale_1080p = true;
+				scale_720p = true;
+				scale_480p = true;
+			}
 		}
 
 		private void helpScreen()
@@ -133,6 +197,11 @@ namespace FilmEditor.Commands
 			helpScreenText.AppendLine("");
             helpScreenText.AppendLine("    -o | --output <destionation folder>  (Optional) Set Destionation Folder");
 			helpScreenText.AppendLine("    -n | --new                        Switch statement to make a new folder per video converted");
+			helpScreenText.AppendLine("    --4k                              Switch to select 4K scale option");
+			helpScreenText.AppendLine("    --2k                              Switch to select 2K scale option");
+			helpScreenText.AppendLine("    --1080p                           Switch to select 1080p scale option");
+			helpScreenText.AppendLine("    --720p                            Switch to select 720p scale option");
+			helpScreenText.AppendLine("    --480p                            Switch to select 480p scale option");
             helpScreenText.AppendLine("");
 
             Console.WriteLine(helpScreenText.ToString());
@@ -200,22 +269,22 @@ namespace FilmEditor.Commands
 				case (int)Scale._4kwidth16x9:
 					break;
 				case (int)Scale._2kwidth16x9:
-					UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
 					break;
 				case (int)Scale._1080width16x9:
-					UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 					break;
 				case (int)Scale._720width16x9:
-					UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-					UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+					if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
 					break;
 				case (int)Scale._480width16x9:
-					UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-					UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-					UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+					if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+					if (scale_720p) UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
 					break;
 			}
 		}
@@ -229,22 +298,22 @@ namespace FilmEditor.Commands
 			switch (ffprobeAnalysis.PrimaryVideoStream.Width)
 			{
 				case (int)Scale._4kwidth16x9:
-					DownScale(ffprobeAnalysis, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-					DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-					DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+					if (scale_2k) DownScale(ffprobeAnalysis, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._2kwidth16x9:
-					DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-					DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._1080width16x9:
-					DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._720width16x9:
-					DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._480width16x9:
 					break;
@@ -259,48 +328,48 @@ namespace FilmEditor.Commands
 		{
 			if (source.PrimaryVideoStream.Height > (int)Scale._4kheight16x9)
 			{
-				DownScale(source, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				DownScale(source, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-				DownScale(source, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-				DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-				DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+				if (scale_4k) DownScale(source, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) DownScale(source, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_1080p) DownScale(source, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._4kheight16x9 && source.PrimaryVideoStream.Height < (int)Scale._2kheight16x9)
 			{
-				UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				DownScale(source, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-				DownScale(source, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-				DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-				DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) DownScale(source, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_1080p) DownScale(source, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._2kheight16x9 && source.PrimaryVideoStream.Height > (int)Scale._1080height16x9)
 			{
-				UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._1080height16x9 && source.PrimaryVideoStream.Height > (int)Scale._720height16x9)
 			{
-				UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-				UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-				DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-				DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._720height16x9 && source.PrimaryVideoStream.Height > (int)Scale._480height16x9)
 			{
-				UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-				UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-				UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-				DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+				if (scale_720p) UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 			}
 			else
 			{
-				UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
-				UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
-				UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
-				UpScale(file, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
+				if (scale_720p) UpScale(file, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
+				if (scale_480p) UpScale(file, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 			}
 		}
 
@@ -315,22 +384,22 @@ namespace FilmEditor.Commands
 				case (int)Scale._4kwidth4x3:
 					break;
 				case (int)Scale._2kwidth4x3:
-					UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
 					break;
 				case (int)Scale._1080width4x3:
-					UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
 					break;
 				case (int)Scale._720width4x3:
-					UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-					UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+					if (scale_1080p) UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
 					break;
 				case (int)Scale._480width4x3:
-					UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-					UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-					UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-					UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+					if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+					if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+					if (scale_1080p) UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+					if (scale_720p) UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
 					break;
 			}
 		}
@@ -344,22 +413,22 @@ namespace FilmEditor.Commands
 			switch (ffprobeAnalysis.PrimaryVideoStream.Width)
 			{
 				case (int)Scale._4kwidth4x3:
-					DownScale(ffprobeAnalysis, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-					DownScale(ffprobeAnalysis, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-					DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+					if (scale_2k) DownScale(ffprobeAnalysis, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 					break;
 				case (int)Scale._2kwidth4x3:
-					DownScale(ffprobeAnalysis, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-					DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 					break;
 				case (int)Scale._1080width4x3:
-					DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-					DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 					break;
 				case (int)Scale._720width4x3:
-					DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 					break;
 				case (int)Scale._480width4x3:
 					break;
@@ -374,48 +443,48 @@ namespace FilmEditor.Commands
 		{
 			if (source.PrimaryVideoStream.Height > (int)Scale._4kheight4x3)
 			{
-				DownScale(source, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				DownScale(source, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-				DownScale(source, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-				DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-				DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+				if (scale_4k) DownScale(source, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) DownScale(source, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_1080p) DownScale(source, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._4kheight4x3 && source.PrimaryVideoStream.Height < (int)Scale._2kheight4x3)
 			{
-				UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				DownScale(source, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-				DownScale(source, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-				DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-				DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) DownScale(source, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_1080p) DownScale(source, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._2kheight4x3 && source.PrimaryVideoStream.Height > (int)Scale._1080height4x3)
 			{
-				UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._1080height4x3 && source.PrimaryVideoStream.Height > (int)Scale._720height4x3)
 			{
-				UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-				UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-				DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-				DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+				if (scale_720p) DownScale(source, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 			}
 			else if (source.PrimaryVideoStream.Height < (int)Scale._720height4x3 && source.PrimaryVideoStream.Height > (int)Scale._480height4x3)
 			{
-				UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-				UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-				UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-				DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+				if (scale_720p) UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+				if (scale_480p) DownScale(source, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 			}
 			else
 			{
-				UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
-				UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
-				UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
-				UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
-				UpScale(file, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
+				if (scale_4k) UpScale(file, (int)Scale._4kwidth4x3, (int)Scale._4kheight4x3, outputNames[0]);
+				if (scale_2k) UpScale(file, (int)Scale._2kwidth4x3, (int)Scale._2kheight4x3, outputNames[1]);
+				if (scale_1080p) UpScale(file, (int)Scale._1080width4x3, (int)Scale._1080height4x3, outputNames[2]);
+				if (scale_720p) UpScale(file, (int)Scale._720width4x3, (int)Scale._720height4x3, outputNames[3]);
+				if (scale_480p) UpScale(file, (int)Scale._480width4x3, (int)Scale._480height4x3, outputNames[4]);
 			}
 		}
 
@@ -485,19 +554,19 @@ namespace FilmEditor.Commands
 			switch (source.PrimaryVideoStream.Height)
 			{
 				case (int)Scale._4kheight16x9:
-					File.Copy(file, outputNames[0]);
+					if (scale_4k) File.Copy(file, outputNames[0]);
 					break;
 				case (int)Scale._2kheight16x9:
-					File.Copy(file, outputNames[1]);
+					if (scale_2k) File.Copy(file, outputNames[1]);
 					break;
 				case (int)Scale._1080height16x9:
-					File.Copy(file, outputNames[2]);
+					if (scale_1080p) File.Copy(file, outputNames[2]);
 					break;
 				case (int)Scale._720height16x9:
-					File.Copy(file, outputNames[3]);
+					if (scale_720p) File.Copy(file, outputNames[3]);
 					break;
 				case (int)Scale._480height16x9:
-					File.Copy(file, outputNames[4]);
+					if (scale_480p) File.Copy(file, outputNames[4]);
 					break;
 			}
 		}
