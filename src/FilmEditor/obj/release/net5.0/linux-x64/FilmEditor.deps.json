@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {},
     ".NETCoreApp,Version=v5.0/linux-x64": {
-      "FilmEditor/1.6.21": {
+      "FilmEditor/1.7.29": {
         "dependencies": {
           "ConsoleTables": "2.4.2",
           "FFMpegCore": "3.3.0",
@@ -822,7 +822,7 @@
     }
   },
   "libraries": {
-    "FilmEditor/1.6.21": {
+    "FilmEditor/1.7.29": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

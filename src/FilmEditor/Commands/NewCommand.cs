@@ -53,7 +53,7 @@ namespace FilmEditor.Commands
             });
         }
 
-        private void ParseArgs(string[] args)
+        public void ParseArgs(string[] args)
         {
             for(int i = 0; i < args.Length; i++)
             {
@@ -74,18 +74,18 @@ namespace FilmEditor.Commands
             }
         }
 
-        private void setCSVContents()
+        public void setCSVContents()
         {
             csvContents = new ConsoleTable("inputFile","start", "stop","outputFile");
             csv.AppendLine("inputFile,start,stop,outputFile");
         }
 
-        private void getCsvFileName()
+        public void getCsvFileName()
         {
             csvFilename = $"{ Path.GetFileNameWithoutExtension(inputFile) }.csv";
         }
 
-        private void getNextRow()
+        public void getNextRow()
         {
             if (command == "split")
             {
@@ -97,7 +97,7 @@ namespace FilmEditor.Commands
             }
         }
 
-        private void getNextRowSplit()
+        public void getNextRowSplit()
         {
             if (String.IsNullOrEmpty(showName))
             {
@@ -131,7 +131,7 @@ namespace FilmEditor.Commands
             Console.WriteLine();
         }
 
-        private string getEpisodeFilename(string episode)
+        public string getEpisodeFilename(string episode)
         {
             if (seasonNum.Length < 2)
             {
@@ -157,7 +157,7 @@ namespace FilmEditor.Commands
             }
         }
 
-        private void getNextRowEdit()
+        public void getNextRowEdit()
         {
             editCount++;
 
@@ -176,7 +176,7 @@ namespace FilmEditor.Commands
             Console.WriteLine();
         }
 
-        private int convertTime(string timeString)
+        public int convertTime(string timeString)
         {
             int total = 0;
             int hours = 0;
@@ -208,7 +208,7 @@ namespace FilmEditor.Commands
             return total;
         }
 
-        private bool exitCheck()
+        public bool exitCheck()
         {
             Console.WriteLine("Quit adding entries? (y/n)");
             string answer = Console.ReadLine();
@@ -223,12 +223,12 @@ namespace FilmEditor.Commands
             }
         }
 
-        private void saveCSV()
+        public void saveCSV()
         {
             File.WriteAllText(csvFilename, csv.ToString());
         }
 
-        private void helpScreen()
+        public void helpScreen()
         {
             StringBuilder helpScreenText = new();
 

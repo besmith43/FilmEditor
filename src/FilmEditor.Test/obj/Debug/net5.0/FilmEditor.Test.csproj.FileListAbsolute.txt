@@ -98,3 +98,14 @@ C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\obj\Debug\net5.0\FilmE
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\obj\Debug\net5.0\ref\FilmEditor.Test.dll
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\obj\Debug\net5.0\FilmEditor.Test.pdb
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\obj\Debug\net5.0\FilmEditor.Test.genruntimeconfig.cache
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.exe
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\ConsoleTables.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FFMpegCore.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\Instances.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.dll
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.pdb

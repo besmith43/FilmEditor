@@ -108,7 +108,7 @@ namespace FilmEditor.Commands
 			rename.Add(old_name, episodeFilename);
 		}
 
-		private string getEpisodeFilename(string episode, string season)
+		public string getEpisodeFilename(string episode, string season)
         {
             if (season.Length < 2)
             {

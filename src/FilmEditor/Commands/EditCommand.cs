@@ -69,10 +69,12 @@ namespace FilmEditor.Commands
                 if (args[i] == "-c" || args[i] == "--csv")
                 {
                     csvFile = args[i+1];
+                    i++;
                 }
                 else if (args[i] == "-o" || args[i] == "--output")
                 {
                     outputFile = args[i+1];
+                    i++;
                 }
             }
         }

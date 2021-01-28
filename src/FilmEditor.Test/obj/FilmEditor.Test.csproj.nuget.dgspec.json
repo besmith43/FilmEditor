@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj": {
-      "version": "1.6.21",
+      "version": "1.7.29",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj",
         "projectName": "FilmEditor.Test",
@@ -28,7 +28,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj": {
+                "projectPath": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -60,6 +64,71 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj": {
+      "version": "1.7.29",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
+        "projectName": "FilmEditor",
+        "projectPath": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
+        "packagesPath": "C:\\Users\\besmi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\besmi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "consoletables": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            },
+            "ffmpegcore": {
+              "target": "Package",
+              "version": "[3.3.0, )"
             }
           },
           "imports": [

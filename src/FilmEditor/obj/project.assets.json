@@ -1286,7 +1286,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.6.21",
+    "version": "1.7.29",
     "restore": {
       "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
       "projectName": "FilmEditor",

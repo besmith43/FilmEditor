@@ -242,7 +242,7 @@ namespace FilmEditor.Commands
 			}
 		}
 
-		private string GetAspectRatio(int width, int height)
+		public string GetAspectRatio(int width, int height)
 		{			
 			if (((height * 16) / 9) == width)
 			{
