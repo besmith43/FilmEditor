@@ -7,6 +7,9 @@ namespace FilmEditor
 {
     class Program
     {
+        public static string WindowsLocalDir = $"C:\\Users\\{ Environment.UserName }\\AppData\\Local\\FilmEditor";
+        public static string LinuxLocalDir = $"/home/{ Environment.UserName }/.local/filmeditor";
+        public static string MacOSLocalDir = $"/Users/{ Environment.UserName }/.local/filmeditor";
         public static Options cmdFlags;
         static void Main(string[] args)
         {
@@ -77,5 +80,42 @@ namespace FilmEditor
 		    }
 		    return null;
 		}
+
+        public static string GetLocalConfig()
+		{
+			if (IsWindows())
+			{
+                if (!Directory.Exists(WindowsLocalDir))
+                {
+                    Directory.CreateDirectory(WindowsLocalDir);
+                }
+
+				return $"{ WindowsLocalDir }\\config.csv";
+			}
+			else if (IsLinux())
+			{
+                if (!Directory.Exists(LinuxLocalDir))
+                {
+                    Directory.CreateDirectory(LinuxLocalDir);
+                }
+
+				return $"{ LinuxLocalDir }/config.csv";
+			}
+			else
+			{
+                if (!Directory.Exists(MacOSLocalDir))
+                {
+                    Directory.CreateDirectory(MacOSLocalDir);
+                }
+
+				return $"{ MacOSLocalDir }/config.csv";
+			}
+		}
+
+		public static bool IsWindows() =>
+            System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+
+		public static bool IsLinux() =>
+            System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
     }
 }

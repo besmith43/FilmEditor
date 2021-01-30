@@ -1,7 +1,7 @@
 ﻿<Project>
 <PropertyGroup>
     <Company>BSmith</Company>
-    <Version>1.7.29</Version>
+    <Version>1.8.39</Version>
     <AssemblyTitle>FilmEditor</AssemblyTitle>
 </PropertyGroup>
 </Project>

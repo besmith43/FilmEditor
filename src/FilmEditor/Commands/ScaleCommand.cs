@@ -19,6 +19,7 @@ namespace FilmEditor.Commands
 		// maybe add a timer?
 		public const string COMMAND_NAME = "scale";
 		public string exeFile;
+		public string configPath = Program.GetLocalConfig();
 		public string movieFile;
 		public string seasonFolder;
 		public string outputDirectory;
@@ -117,6 +118,7 @@ namespace FilmEditor.Commands
 				{
 					exeFile = args[i+1];
 					i++;
+					SaveConfig(exeFile);
 				}
 				else if (args[i] == "-o" || args[i] == "--output")
 				{
@@ -172,6 +174,13 @@ namespace FilmEditor.Commands
 						scaleFlag = true;
 					}
 				}
+				else
+				{
+					if (string.IsNullOrEmpty(exeFile) && File.Exists(configPath))
+					{
+						ReadConfig();
+					}
+				}
             }
 
 			if (!scaleFlag)
@@ -205,6 +214,51 @@ namespace FilmEditor.Commands
             helpScreenText.AppendLine("");
 
             Console.WriteLine(helpScreenText.ToString());
+		}
+
+		public void SaveConfig(string video2xPath)
+		{
+			if (File.Exists(configPath))
+			{
+				string[] lines = File.ReadAllLines(configPath);
+
+				for (int i = 1; i < lines.Length; i++)
+				{
+					string[] contents = lines[i].Split(',');
+
+					if (contents[0] == "video2x")
+					{
+						lines[i] = $"video2x,{ video2xPath }";
+					}
+				}
+
+				File.Delete(configPath);
+				File.WriteAllLines(configPath, lines);
+			}
+			else
+			{
+				StringBuilder csvConfig = new();
+
+				csvConfig.AppendLine("Config,Value");
+				csvConfig.AppendLine($"video2x,{ video2xPath }");
+
+				File.WriteAllText(configPath, csvConfig.ToString());
+			}
+		}
+
+		public void ReadConfig()
+		{
+			string[] lines = File.ReadAllLines(configPath);
+
+			for (int i = 1; i < lines.Length; i++)
+			{
+				string[] contents = lines[i].Split(',');
+
+				if (contents[0] == "video2x")
+				{
+					exeFile = contents[1];
+				}
+			}
 		}
 
 		public void ConvertMovie(string file)
@@ -244,11 +298,11 @@ namespace FilmEditor.Commands
 
 		public string GetAspectRatio(int width, int height)
 		{			
-			if (((height * 16) / 9) == width)
+			if (Math.Ceiling(((height * 16) / 9.0)) == width)
 			{
 				return "16x9";
 			}
-			else if (((height * 4) / 3) == width)
+			else if (Math.Ceiling(((height * 4) / 3.0)) == width)
 			{
 				return "4x3";
 			}
@@ -269,18 +323,22 @@ namespace FilmEditor.Commands
 				case (int)Scale._4kwidth16x9:
 					break;
 				case (int)Scale._2kwidth16x9:
+					DebugWriteLine("Upscaling 16x9 2k to 4k");
 					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
 					break;
 				case (int)Scale._1080width16x9:
+					DebugWriteLine("Upscaling 16x9 1080p to 2k & 4k");
 					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
 					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 					break;
 				case (int)Scale._720width16x9:
+					DebugWriteLine("Upscaling 16x9 720p to 1080p, 2k, & 4k");
 					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
 					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 					if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
 					break;
 				case (int)Scale._480width16x9:
+					DebugWriteLine("Upscaling 16x9 480p to 720p, 1080p, 2k, & 4k");
 					if (scale_4k) UpScale(file, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
 					if (scale_2k) UpScale(file, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 					if (scale_1080p) UpScale(file, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
@@ -298,21 +356,25 @@ namespace FilmEditor.Commands
 			switch (ffprobeAnalysis.PrimaryVideoStream.Width)
 			{
 				case (int)Scale._4kwidth16x9:
+					DebugWriteLine("Downscaling 16x9 4k to 2k, 1080p, 720p, & 480p");
 					if (scale_2k) DownScale(ffprobeAnalysis, (int)Scale._2kwidth16x9, (int)Scale._2kheight16x9, outputNames[1]);
 					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
 					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
 					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._2kwidth16x9:
+					DebugWriteLine("Downscaling 16x9 2k to 1080p, 720p, & 480p");
 					if (scale_1080p) DownScale(ffprobeAnalysis, (int)Scale._1080width16x9, (int)Scale._1080height16x9, outputNames[2]);
 					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
 					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._1080width16x9:
+					DebugWriteLine("Downscaling 16x9 1080p to 720p, & 480p");
 					if (scale_720p) DownScale(ffprobeAnalysis, (int)Scale._720width16x9, (int)Scale._720height16x9, outputNames[3]);
 					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._720width16x9:
+					DebugWriteLine("Downscaling 16x9 720p to 480p");
 					if (scale_480p) DownScale(ffprobeAnalysis, (int)Scale._480width16x9, (int)Scale._480height16x9, outputNames[4]);
 					break;
 				case (int)Scale._480width16x9:
@@ -326,6 +388,8 @@ namespace FilmEditor.Commands
 
 		private void CustomScale16x9(IMediaAnalysis source, string file, string[] outputNames)
 		{
+			DebugWriteLine("Starting Custom Scale Upscale and Downscale");
+
 			if (source.PrimaryVideoStream.Height > (int)Scale._4kheight16x9)
 			{
 				if (scale_4k) DownScale(source, (int)Scale._4kwidth16x9, (int)Scale._4kheight16x9, outputNames[0]);
@@ -540,6 +604,11 @@ namespace FilmEditor.Commands
 
 		private void DownScale(IMediaAnalysis source, int downscaledWidth, int downscaledHeight, string output)
 		{
+			DebugWriteLine($"Source File: { source.Path }");
+			DebugWriteLine($"DownScaled Width: { downscaledWidth }");
+			DebugWriteLine($"DownScaled Height: { downscaledHeight }");
+			DebugWriteLine($"Output: { output }");
+
 			FFMpegArguments
 				.FromFileInput(source)
 				.OutputToFile(output, true, options => options

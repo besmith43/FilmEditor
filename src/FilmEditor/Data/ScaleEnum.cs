@@ -13,7 +13,7 @@ namespace FilmEditor.Data
 		_4kheight4x3 = 2160,
 		_4kwidth4x3 = 2880,
 		_480height16x9 = 480,
-		_480width16x9 = 853,
+		_480width16x9 = 854,
 		_720height16x9 = 720,
 		_720width16x9 = 1280,
 		_1080height16x9 = 1080,
