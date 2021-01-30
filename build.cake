@@ -108,6 +108,24 @@ Task("RunScale-4k")
         });
     });
 
+Task("RunScale-4k-noExeFlag")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--new");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\"");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
 Task("Package")
     .IsDependentOn("Test")
     .Does(() => {

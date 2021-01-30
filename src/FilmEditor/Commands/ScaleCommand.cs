@@ -176,12 +176,14 @@ namespace FilmEditor.Commands
 				}
 				else
 				{
-					if (string.IsNullOrEmpty(exeFile) && File.Exists(configPath))
-					{
-						ReadConfig();
-					}
+					
 				}
             }
+
+			if (string.IsNullOrEmpty(exeFile) && File.Exists(configPath))
+			{
+				ReadConfig();
+			}
 
 			if (!scaleFlag)
 			{

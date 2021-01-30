@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj": {
-      "version": "1.8.39",
+      "version": "1.9.42",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj",
         "projectName": "FilmEditor.Test",
@@ -86,7 +86,7 @@
       }
     },
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj": {
-      "version": "1.8.39",
+      "version": "1.9.42",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
         "projectName": "FilmEditor",
