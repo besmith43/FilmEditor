@@ -11,6 +11,11 @@ Task("Clean")
     .Does(() => {
         CleanDirectory(outputFolder);
         CleanDirectory("./test/300 s01e01");
+        CleanDirectory("./test/anime4kcpp");
+        CleanDirectory("./test/realsr_ncnn_vulkan");
+        CleanDirectory("./test/srmd_ncnn_vulkan");
+        CleanDirectory("./test/waifu2x_converter_cpp");
+        CleanDirectory("./test/waifu2x_ncnn_vulkan");
     });
 
 Task("Version")
@@ -125,6 +130,126 @@ Task("RunScale-4k-noExeFlag")
             NoBuild = true
         });
     });
+
+Task("RunScale-Anime4kcpp")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\anime4kcpp\"");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-waifu2x-caffe")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x-caffe\"");
+        arguments.Append("--driver");
+        arguments.Append("waifu2x_caffe");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-waifu2x_converter_cpp")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x_converter_cpp\"");
+        arguments.Append("--driver");
+        arguments.Append("waifu2x_converter_cpp");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-waifu2x_ncnn_vulkan")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x_ncnn_vulkan\"");
+        arguments.Append("--driver");
+        arguments.Append("waifu2x_ncnn_vulkan");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-srmd_ncnn_vulkan")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\srmd_ncnn_vulkan\"");
+        arguments.Append("--driver");
+        arguments.Append("srmd_ncnn_vulkan");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-realsr_ncnn_vulkan")
+    .IsDependentOn("Test")
+    .Does(() => {
+        var arguments = new ProcessArgumentBuilder();
+        arguments.Append("scale");
+        arguments.Append("--movie");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append("--output");
+        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\realsr_ncnn_vulkan\"");
+        arguments.Append("--driver");
+        arguments.Append("realsr_ncnn_vulkan");
+        arguments.Append("--4k");
+        DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
+            Configuration = DebugConfiguration,
+            NoRestore = true,
+            NoBuild = true
+        });
+    });
+
+Task("RunScale-All-Drivers")
+    .IsDependentOn("RunScale-Anime4kcpp")
+    //.IsDependentOn("RunScale-waifu2x-caffe")
+    .IsDependentOn("RunScale-waifu2x_converter_cpp")
+    .IsDependentOn("RunScale-waifu2x_ncnn_vulkan")
+    .IsDependentOn("RunScale-srmd_ncnn_vulkan")
+    .IsDependentOn("RunScale-realsr_ncnn_vulkan");
 
 Task("Package")
     .IsDependentOn("Test")

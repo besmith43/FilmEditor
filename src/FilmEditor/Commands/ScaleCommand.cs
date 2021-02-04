@@ -24,6 +24,8 @@ namespace FilmEditor.Commands
 		public string seasonFolder;
 		public string outputDirectory;
 		public bool newFolder = false;
+		public string driver = DriverEnum.anime4kcpp;
+		public int processes = 16;
 		public bool scale_4k = false;
 		public bool scale_2k = false;
 		public bool scale_1080p = false;
@@ -129,6 +131,41 @@ namespace FilmEditor.Commands
 				{
 					newFolder = true;
 				}
+				else if (args[i] == "-d" || args[i] == "--driver")
+				{
+					switch(args[i+1])
+					{
+						case DriverEnum.anime4kcpp:
+							driver = DriverEnum.anime4kcpp;
+							break;
+						case DriverEnum.waifu2x_caffe:
+							driver = DriverEnum.waifu2x_caffe;
+							break;
+						case DriverEnum.waifu2x_converter_cpp:
+							driver = DriverEnum.waifu2x_converter_cpp;
+							break;
+						case DriverEnum.waifu2x_ncnn_vulkan:
+							driver = DriverEnum.waifu2x_ncnn_vulkan;
+							break;
+						case DriverEnum.srmd_ncnn_vulkan:
+							driver = DriverEnum.srmd_ncnn_vulkan;
+							break;
+						case DriverEnum.realsr_ncnn_vulkan:
+							driver = DriverEnum.realsr_ncnn_vulkan;
+							break;
+					}
+					i++;
+				}
+				else if (args[i] == "-p" || args[i] == "--processes")
+				{
+					string tryProcesses = args[i+1];
+					i++;
+
+					if (!int.TryParse(tryProcesses, out processes))
+					{
+						processes = 16;
+					}
+				}
 				else if (args[i] == "--4k")
 				{
 					scale_4k = true;
@@ -208,6 +245,8 @@ namespace FilmEditor.Commands
 			helpScreenText.AppendLine("");
             helpScreenText.AppendLine("    -o | --output <destionation folder>  (Optional) Set Destionation Folder");
 			helpScreenText.AppendLine("    -n | --new                        Switch statement to make a new folder per video converted");
+			helpScreenText.AppendLine("    -d | --driver                     Select the Driver that you'd like to use for upscaling");
+			helpScreenText.AppendLine("    -p | --processes                  Select the number of processes to use for upscaling");
 			helpScreenText.AppendLine("    --4k                              Switch to select 4K scale option");
 			helpScreenText.AppendLine("    --2k                              Switch to select 2K scale option");
 			helpScreenText.AppendLine("    --1080p                           Switch to select 1080p scale option");
@@ -559,7 +598,7 @@ namespace FilmEditor.Commands
 			string yamlPath = $"{ Path.GetDirectoryName(exeFile) }\\video2x.yaml";
 			DebugWriteLine($"Yaml Path: { yamlPath }");
 
-			string commandArgs = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d anime4kcpp -p 16 -o \"{ output }\"";
+			string commandArgs = $"-c { yamlPath } -i \"{ file }\" -w { upscaledWidth } -h { upscaledHeight } -d { driver } -p { processes } -o \"{ output }\"";
 
 			//Console.WriteLine("Running Video2x with the following command: ");
 			//Console.WriteLine($"{ exeFile } { commandArgs }");

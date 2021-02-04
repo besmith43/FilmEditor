@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj": {
-      "version": "1.9.42",
+      "version": "1.9.46",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
         "projectName": "FilmEditor",
@@ -66,11 +66,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "win-x86": {
-          "#import": []
         }
       }
     }
