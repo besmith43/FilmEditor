@@ -7,6 +7,11 @@ var outputFolder = "./output";
 var selfcontainedOutputFolder = $"{ outputFolder }/self-contained";
 var dependentOutputFolder = $"{ outputFolder }/framework-dependent";
 
+var callerInfo = Context.GetCallerInfo();
+var pwd = callerInfo.SourceFilePath.ToString();
+pwd = pwd.Remove(pwd.Length - 11);
+pwd = pwd.Replace('/','\\');
+
 Task("Clean")
     .Does(() => {
         CleanDirectory(outputFolder);
@@ -120,9 +125,9 @@ Task("RunScale-4k-noExeFlag")
         arguments.Append("scale");
         arguments.Append("--new");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\"");
+        arguments.Append($"\"{ pwd }\\test\"");
         arguments.Append("--4k");
         DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
             Configuration = DebugConfiguration,
@@ -137,9 +142,9 @@ Task("RunScale-Anime4kcpp")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\anime4kcpp\"");
+        arguments.Append($"\"{ pwd }\\test\\anime4kcpp\"");
         arguments.Append("--4k");
         DotNetCoreRun(projFile, arguments, new DotNetCoreRunSettings{
             Configuration = DebugConfiguration,
@@ -154,9 +159,9 @@ Task("RunScale-waifu2x-caffe")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x-caffe\"");
+        arguments.Append($"\"{ pwd }\\test\\waifu2x-caffe\"");
         arguments.Append("--driver");
         arguments.Append("waifu2x_caffe");
         arguments.Append("--4k");
@@ -173,9 +178,9 @@ Task("RunScale-waifu2x_converter_cpp")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x_converter_cpp\"");
+        arguments.Append($"\"{ pwd }\\test\\waifu2x_converter_cpp\"");
         arguments.Append("--driver");
         arguments.Append("waifu2x_converter_cpp");
         arguments.Append("--4k");
@@ -192,9 +197,9 @@ Task("RunScale-waifu2x_ncnn_vulkan")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\waifu2x_ncnn_vulkan\"");
+        arguments.Append($"\"{ pwd }\\test\\waifu2x_ncnn_vulkan\"");
         arguments.Append("--driver");
         arguments.Append("waifu2x_ncnn_vulkan");
         arguments.Append("--4k");
@@ -211,9 +216,9 @@ Task("RunScale-srmd_ncnn_vulkan")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\srmd_ncnn_vulkan\"");
+        arguments.Append($"\"{ pwd }\\test\\srmd_ncnn_vulkan\"");
         arguments.Append("--driver");
         arguments.Append("srmd_ncnn_vulkan");
         arguments.Append("--4k");
@@ -230,9 +235,9 @@ Task("RunScale-realsr_ncnn_vulkan")
         var arguments = new ProcessArgumentBuilder();
         arguments.Append("scale");
         arguments.Append("--movie");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\300 s01e01.mp4\"");
+        arguments.Append($"\"{ pwd }\\test\\300 s01e01.mp4\"");
         arguments.Append("--output");
-        arguments.Append("\"C:\\Users\\besmi\\Development\\FilmEditor\\test\\realsr_ncnn_vulkan\"");
+        arguments.Append($"\"{ pwd }\\test\\realsr_ncnn_vulkan\"");
         arguments.Append("--driver");
         arguments.Append("realsr_ncnn_vulkan");
         arguments.Append("--4k");
