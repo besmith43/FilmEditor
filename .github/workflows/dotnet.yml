@@ -25,14 +25,19 @@ jobs:
         script-path: build.cake
         target: publish
         
+    - name: App Version
+      run: |
+        chmod +x ./output/self-contained/linux-x64/FilmEditor
+        ./output/self-contained/linux-x64/FilmEditor --version | awk $2 > ./output/version.txt
+        
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: $(cat ./output/version.txt)
+        release_name: Release $(cat ./output/version.txt)
         draft: false
         prerelease: false
     - name: Upload Release Asset
