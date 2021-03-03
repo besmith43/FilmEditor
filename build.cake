@@ -399,6 +399,23 @@ Task("Publish")
     .IsDependentOn("Publish-Dependent-Win-arm64")
     .IsDependentOn("Publish-Dependent-Win-x86");
 
+Task("Github-Publish-Win-x64")
+    .IsDependentOn("Test")
+    .Does(() => {
+        DotNetCorePublish(projFile, new DotNetCorePublishSettings{
+            Configuration = ReleaseConfiguration,
+            OutputDirectory = $"{ selfcontainedOutputFolder }/win-x64",
+            PublishSingleFile = true,
+            SelfContained = true,
+            Runtime = "win-x64"
+        });
+        
+        MoveFile($"{ selfcontainedOutputFoler }/win-x64/FilmEditor.exe", $"{ selfcontainedOutputFoler }/win-x64/FilmEditor_winx64-self.exe");
+    });
+
+Task("Github-Publish")
+    .IsDependentOn("Github-Publish-Win-x64");
+
 Task("Publish-Debug-Dependent-Win-x64")
     .IsDependentOn("Test")
     .Does(() => {
