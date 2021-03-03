@@ -48,7 +48,7 @@ Usage:  FilmEditor new [OPTION]
 Usage:  FilmEditor scale [OPTION]
 
     -e | --exe <video2x executable file>            Pass in the path to the video2x executable file
-	    -m | --movie <single video file>            Pass in the file to be scaled up and down accordingly
+    -m | --movie <single video file>            Pass in the file to be scaled up and down accordingly
     -t | -tv <folder path>            Path in the folder to be scaled up and down accordingly
     -o | --output <destionation folder>  (Optional) Set Destionation Folder
     -n | --new                        Switch statement to make a new folder per video converted
