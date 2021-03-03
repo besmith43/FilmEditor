@@ -1,12 +1,12 @@
-#FilmEditor
+# FilmEditor
 
 This tool was made for the purpose of automating some of the processes required for maniplating video files for my home media server.
 
-##Requirements
+## Requirements
 
 This application requires ffmpeg to be in your system's path.  For Scaling only, it requires [video2x](https://github.com/k4yt3x/video2x) and is only tested to work with the Windows binaries.
 
-##Commands
+## Commands
 
 There are several commands that this application performs
 
@@ -16,7 +16,7 @@ There are several commands that this application performs
 * rename
 * scale
 
-####New Command
+#### New Command
 
 Usage:  FilmEditor new [OPTION]
 
@@ -24,26 +24,26 @@ Usage:  FilmEditor new [OPTION]
     -s | --split <mp4 file>          Create csv for split command
     --season <int>                   (Optional) Pass in the season number
 
-####Edit Command
+#### Edit Command
 
 Usage:  FilmEditor edit [OPTION]
 
     -c | --csv <csv file>            Pass in csv containing edit information
 	-o | --output <destionation folder>  (Optional) Set Destionation Folder
 
-####Split Command
+#### Split Command
 
 Usage:  FilmEditor new [OPTION]
 
     -c | --csv <csv file>        Pass in csv containing split information
 
-####Rename Command
+#### Rename Command
 
 Usage:  FilmEditor new [OPTION]
 
     -s | --source <source folder>               Pass in the folder with the original files that need to be renamed
 
-####Scale Command
+#### Scale Command
 
 Usage:  FilmEditor scale [OPTION]
 
