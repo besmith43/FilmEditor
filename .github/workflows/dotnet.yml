@@ -20,4 +20,5 @@ jobs:
       - name: Run the Cake script
         uses: cake-build/cake-action@v1
         with:
+        script-path: build.cake
         target: publish
