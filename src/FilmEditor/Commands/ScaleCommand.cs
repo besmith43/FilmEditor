@@ -26,6 +26,7 @@ namespace FilmEditor.Commands
 		public bool newFolder = false;
 		public string driver = DriverEnum.anime4kcpp;
 		public int processes = 16;
+		public bool confirm = false;
 		public bool scale_4k = false;
 		public bool scale_2k = false;
 		public bool scale_1080p = false;
@@ -166,6 +167,10 @@ namespace FilmEditor.Commands
 						processes = 16;
 					}
 				}
+				else if (args[i] == "-y")
+				{
+					confirm = true;
+				}
 				else if (args[i] == "--4k")
 				{
 					scale_4k = true;
@@ -247,6 +252,7 @@ namespace FilmEditor.Commands
 			helpScreenText.AppendLine("    -n | --new                        Switch statement to make a new folder per video converted");
 			helpScreenText.AppendLine("    -d | --driver                     Select the Driver that you'd like to use for upscaling");
 			helpScreenText.AppendLine("    -p | --processes                  Select the number of processes to use for upscaling");
+			helpScreenText.AppendLine("    -y								 Switch to confirm if the video is an odd ratio");
 			helpScreenText.AppendLine("    --4k                              Switch to select 4K scale option");
 			helpScreenText.AppendLine("    --2k                              Switch to select 2K scale option");
 			helpScreenText.AppendLine("    --1080p                           Switch to select 1080p scale option");
@@ -322,6 +328,11 @@ namespace FilmEditor.Commands
 				UpScale4x3(vidAnalysis, file);
 				DownScale4x3(vidAnalysis, file);
 				CopyOriginal(vidAnalysis, file);
+			}
+			else if (confirm)
+			{
+				string[] outputNames = GenerateOutputNames(file);
+				CustomScale16x9(vidAnalysis, file, outputNames);
 			}
 			else
 			{
