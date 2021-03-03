@@ -20,7 +20,7 @@ namespace FilmEditor.cmd
         {
             helpFlag = false;
             versionFlag = false;
-            versionText = $"FilmEditor { Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version }";
+            versionText = $"{ Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version }";
             verbose = false;
             StringBuilder helpTextBuilder = new StringBuilder();
             helpTextBuilder.AppendLine($"FilmEditor { versionText }");
