@@ -42,7 +42,7 @@ jobs:
         draft: false
         prerelease: false
     - name: Upload Release Asset
-      id: upload-release-asset 
+      id: upload-release-asset-winx64-self
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,7 +52,7 @@ jobs:
         asset_name: FilmEditor_winx64-self.exe
         asset_content_type: application/exe
     - name: Upload Release Asset
-      id: upload-release-asset 
+      id: upload-release-asset-winx86-self 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
