@@ -28,7 +28,7 @@ jobs:
     - name: App Version
       run: |
         chmod +x ./output/self-contained/linux-x64/FilmEditor
-        ./output/self-contained/linux-x64/FilmEditor --version > ./output/version.txt
+        ./output/self-contained/linux-x64/FilmEditor --version > ./version.txt
         
     - name: Create Release
       id: create_release
@@ -36,8 +36,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: $(cat ./output/version.txt)
-        release_name: Release $(cat ./output/version.txt)
+        tag_name: $(cat ./version.txt)
+        release_name: Release $(cat ./version.txt)
         draft: false
         prerelease: false
     - name: Upload Release Asset
