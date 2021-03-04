@@ -51,3 +51,6 @@ jobs:
         asset_path: ./output/self-contained/win-x64/FilmEditor.exe
         asset_name: FilmEditor_winx64-self.exe
         asset_content_type: application/exe
+        asset_path: ./output/self-contained/win-x86/FilmEditor.exe
+        asset_name: FilmEditor_winx86-self.exe
+        asset_content_type: application/exe
