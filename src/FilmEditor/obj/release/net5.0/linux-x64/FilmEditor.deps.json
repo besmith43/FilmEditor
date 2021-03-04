@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {},
     ".NETCoreApp,Version=v5.0/linux-x64": {
-      "FilmEditor/1.9.42": {
+      "FilmEditor/1.10.52": {
         "dependencies": {
           "ConsoleTables": "2.4.2",
           "FFMpegCore": "3.3.0",
@@ -822,7 +822,7 @@
     }
   },
   "libraries": {
-    "FilmEditor/1.9.42": {
+    "FilmEditor/1.10.52": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1082,6 +1082,33 @@
       "any",
       "base"
     ],
+    "alpine.3.13-x64": [
+      "alpine.3.13",
+      "alpine.3.12-x64",
+      "alpine.3.12",
+      "alpine.3.11-x64",
+      "alpine.3.11",
+      "alpine.3.10-x64",
+      "alpine.3.10",
+      "alpine.3.9-x64",
+      "alpine.3.9",
+      "alpine.3.8-x64",
+      "alpine.3.8",
+      "alpine.3.7-x64",
+      "alpine.3.7",
+      "alpine.3.6-x64",
+      "alpine.3.6",
+      "alpine-x64",
+      "alpine",
+      "linux-musl-x64",
+      "linux-musl",
+      "linux-x64",
+      "linux",
+      "unix-x64",
+      "unix",
+      "any",
+      "base"
+    ],
     "alpine.3.6-x64": [
       "alpine.3.6",
       "alpine-x64",
@@ -1300,6 +1327,35 @@
       "base"
     ],
     "android.29-x64": [
+      "android.29",
+      "android.28-x64",
+      "android.28",
+      "android.27-x64",
+      "android.27",
+      "android.26-x64",
+      "android.26",
+      "android.25-x64",
+      "android.25",
+      "android.24-x64",
+      "android.24",
+      "android.23-x64",
+      "android.23",
+      "android.22-x64",
+      "android.22",
+      "android.21-x64",
+      "android.21",
+      "android-x64",
+      "android",
+      "linux-x64",
+      "linux",
+      "unix-x64",
+      "unix",
+      "any",
+      "base"
+    ],
+    "android.30-x64": [
+      "android.30",
+      "android.29-x64",
       "android.29",
       "android.28-x64",
       "android.28",

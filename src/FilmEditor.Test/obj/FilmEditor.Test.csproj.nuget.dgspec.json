@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj": {
-      "version": "1.9.51",
+      "version": "1.10.52",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor.Test\\FilmEditor.Test.csproj",
         "projectName": "FilmEditor.Test",
@@ -81,12 +81,12 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.1.21103.13\\RuntimeIdentifierGraph.json"
         }
       }
     },
     "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj": {
-      "version": "1.9.51",
+      "version": "1.10.52",
       "restore": {
         "projectUniqueName": "C:\\Users\\besmi\\Development\\FilmEditor\\src\\FilmEditor\\FilmEditor.csproj",
         "projectName": "FilmEditor",
@@ -146,7 +146,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-preview.1.21103.13\\RuntimeIdentifierGraph.json"
         }
       }
     }

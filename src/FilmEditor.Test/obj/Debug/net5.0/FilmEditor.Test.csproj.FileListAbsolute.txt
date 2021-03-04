@@ -109,3 +109,6 @@ C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\runti
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.dll
 C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.pdb
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.deps.json
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.runtimeconfig.json
+C:\Users\besmi\Development\FilmEditor\src\FilmEditor.Test\bin\Debug\net5.0\FilmEditor.runtimeconfig.dev.json

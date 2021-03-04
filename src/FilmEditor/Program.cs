@@ -13,12 +13,6 @@ namespace FilmEditor
         public static Options cmdFlags;
         static void Main(string[] args)
         {
-            if (!CheckForFFMpeg())
-            {
-                Console.WriteLine("FFMpeg is not installed");
-                return;
-            }
-
             cmdParser cmdP = new(args);
 
             cmdFlags = cmdP.Parse();  
@@ -26,6 +20,12 @@ namespace FilmEditor
             if (cmdFlags.versionFlag)
             {
                 Console.WriteLine(cmdFlags.versionText);
+                return;
+            }
+
+			if (!CheckForFFMpeg())
+            {
+                Console.WriteLine("FFMpeg is not installed");
                 return;
             }
 
