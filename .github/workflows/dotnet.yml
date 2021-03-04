@@ -28,7 +28,7 @@ jobs:
     - name: App Version
       run: |
         chmod +x ./output/self-contained/linux-x64/FilmEditor
-        ./output/self-contained/linux-x64/FilmEditor --version | awk $2 > ./output/version.txt
+        ./output/self-contained/linux-x64/FilmEditor --version > ./output/version.txt
         
     - name: Create Release
       id: create_release
