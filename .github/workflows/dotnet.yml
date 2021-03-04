@@ -74,7 +74,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./output/self-contained/win-x64/FilmEditor_win-x64-self-contained.zip
+        asset_path: ./output/self-contained/FilmEditor_win-x64-self-contained.zip
         asset_name: FilmEditor_win-x64-self-contained.zip
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -94,7 +94,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./output/self-contained/win-x86/FilmEditor_win-x86-self-contained.zip
+        asset_path: ./output/self-contained/FilmEditor_win-x86-self-contained.zip
         asset_name: FilmEditor_win-x86-self-contained.zip
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -114,7 +114,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./output/self-contained/win-arm64/FilmEditor_win-arm64-self-contained.zip
+        asset_path: ./output/self-contained/FilmEditor_win-arm64-self-contained.zip
         asset_name: FilmEditor_win-arm64-self-contained.zip
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -134,7 +134,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./output/self-contained/osx-x64/FilmEditor_osx-x64-self-contained.zip
+        asset_path: ./output/self-contained/FilmEditor_osx-x64-self-contained.zip
         asset_name: FilmEditor_osx-x64-self-contained.zip
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -154,7 +154,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./output/self-contained/linux-x64/FilmEditor_linux-x64-self-contained.zip
+        asset_path: ./output/self-contained/FilmEditor_linux-x64-self-contained.zip
         asset_name: FilmEditor_linux-x64-self-contained.zip
         asset_content_type: application/zip
     - name: Upload Release Asset
@@ -164,6 +164,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./output/framework-dependent/win-x64/FilmEditor
-        asset_name: FilmEditor_win-x64-dependent
+        asset_path: ./output/framework-dependent/linux-x64/FilmEditor
+        asset_name: FilmEditor_linux-x64-dependent
         asset_content_type: application/exe
