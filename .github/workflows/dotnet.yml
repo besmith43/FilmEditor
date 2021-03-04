@@ -23,7 +23,7 @@ jobs:
       uses: cake-build/cake-action@v1.3.0
       with:
         script-path: build.cake
-        target: publish
+        target: github-publish
         
     - name: App Version
       run: |
