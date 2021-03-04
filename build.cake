@@ -268,7 +268,6 @@ Task("Package")
     });
 
 Task("Publish-Win-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -280,7 +279,6 @@ Task("Publish-Win-x64")
     });
 
 Task("Publish-Linux-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -292,7 +290,6 @@ Task("Publish-Linux-x64")
     });
 
 Task("Publish-Osx-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -304,7 +301,6 @@ Task("Publish-Osx-x64")
     });
 
 Task("Publish-Win-arm64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -316,7 +312,6 @@ Task("Publish-Win-arm64")
     });
 
 Task("Publish-Win-x86")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -328,7 +323,6 @@ Task("Publish-Win-x86")
     });
 
 Task("Publish-Dependent-Win-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -340,7 +334,6 @@ Task("Publish-Dependent-Win-x64")
     });
 
 Task("Publish-Dependent-Linux-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -352,7 +345,6 @@ Task("Publish-Dependent-Linux-x64")
     });
 
 Task("Publish-Dependent-Osx-x64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -364,7 +356,6 @@ Task("Publish-Dependent-Osx-x64")
     });
 
 Task("Publish-Dependent-Win-arm64")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -376,7 +367,6 @@ Task("Publish-Dependent-Win-arm64")
     });
 
 Task("Publish-Dependent-Win-x86")
-    .IsDependentOn("Test")
     .Does(() => {
         DotNetCorePublish(projFile, new DotNetCorePublishSettings{
             Configuration = ReleaseConfiguration,
@@ -388,6 +378,19 @@ Task("Publish-Dependent-Win-x86")
     });
 
 Task("Publish")
+    .IsDependentOn("Test")
+    .IsDependentOn("Publish-Win-x64")
+    .IsDependentOn("Publish-Linux-x64")
+    .IsDependentOn("Publish-Osx-x64")
+    .IsDependentOn("Publish-Win-arm64")
+    .IsDependentOn("Publish-Win-x86")
+    .IsDependentOn("Publish-Dependent-Win-x64")
+    .IsDependentOn("Publish-Dependent-Linux-x64")
+    .IsDependentOn("Publish-Dependent-Osx-x64")
+    .IsDependentOn("Publish-Dependent-Win-arm64")
+    .IsDependentOn("Publish-Dependent-Win-x86");
+
+Task("Github-Publish")
     .IsDependentOn("Publish-Win-x64")
     .IsDependentOn("Publish-Linux-x64")
     .IsDependentOn("Publish-Osx-x64")
