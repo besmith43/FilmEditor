@@ -29,7 +29,7 @@ jobs:
       run: |
         chmod +x ./output/self-contained/linux-x64/FilmEditor
         ./output/self-contained/linux-x64/FilmEditor --version > ./version.txt
-        echo $(cat ./version.txt)
+        echo "version=$(cat ./version.txt)" >> $GITHUB_ENV
         
     - name: Create Release
       id: create_release
@@ -37,8 +37,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v$(cat ./version.txt)
-        release_name: Release $(cat ./version.txt)
+        tag_name: ${{ env.version }}
+        release_name: Release ${{ env.version }}
         draft: false
         prerelease: false
     - name: Upload Release Asset
