@@ -6,9 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v5.0": {
-      "FilmEditor.Test/1.10.53": {
+      "FilmEditor.Test/1.11.54": {
         "dependencies": {
-          "FilmEditor": "1.10.53",
+          "FilmEditor": "1.11.54",
           "Microsoft.NET.Test.Sdk": "16.7.1",
           "coverlet.collector": "1.3.0",
           "xunit": "2.4.1",
@@ -1165,7 +1165,7 @@
         }
       },
       "xunit.runner.visualstudio/2.4.3": {},
-      "FilmEditor/1.10.53": {
+      "FilmEditor/1.11.54": {
         "dependencies": {
           "ConsoleTables": "2.4.2",
           "FFMpegCore": "3.3.0"
@@ -1177,7 +1177,7 @@
     }
   },
   "libraries": {
-    "FilmEditor.Test/1.10.53": {
+    "FilmEditor.Test/1.11.54": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1861,7 +1861,7 @@
       "path": "xunit.runner.visualstudio/2.4.3",
       "hashPath": "xunit.runner.visualstudio.2.4.3.nupkg.sha512"
     },
-    "FilmEditor/1.10.53": {
+    "FilmEditor/1.11.54": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
