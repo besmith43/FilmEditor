@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Project>
 <PropertyGroup>
     <Company>BSmith</Company>
@@ -5,3 +6,12 @@
     <AssemblyTitle>FilmEditor</AssemblyTitle>
 </PropertyGroup>
 </Project>
+=======
+﻿<Project>
+<PropertyGroup>
+    <Company>BSmith</Company>
+    <Version>1.12.58</Version>
+    <AssemblyTitle>FilmEditor</AssemblyTitle>
+</PropertyGroup>
+</Project>
+>>>>>>> 0c82c8138896b1d8dcfed539b2385dc9f76cfe57
